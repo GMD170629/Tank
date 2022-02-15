@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayManager : MonoBehaviour
 {
@@ -11,6 +13,10 @@ public class PlayManager : MonoBehaviour
     //是否死亡
     public bool isDead;
     public bool isDefeat;
+
+    public Text playerScoreText;
+    public Text playerLifevalueText;
+    public GameObject isDefeatUI;
     
     //得分
     public int playerScore;
@@ -47,10 +53,22 @@ public class PlayManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        if (isDefeat)
+        {
+            isDefeatUI.SetActive(true);
+            Invoke(nameof(ReturnToTheMainMene), 3);
+            return;
+        }
+        
         if (isDead)
         {
             Recover();
         }
+
+
+        playerScoreText.text = playerScore.ToString();
+        playerLifevalueText.text = lifeValue.ToString();
     }
     
     
@@ -60,7 +78,8 @@ public class PlayManager : MonoBehaviour
         if (lifeValue <= 0)
         {
             //游戏失败
-            isDefeat = true;
+            isDefeat = true; 
+            Invoke(nameof(ReturnToTheMainMene), 3);
         }
         else
         {
@@ -70,5 +89,10 @@ public class PlayManager : MonoBehaviour
             go.GetComponent<Born>().createPlayer = true;
             isDead = false;
         }
+    }
+
+    private void ReturnToTheMainMene()
+    {
+        SceneManager.LoadScene(0);
     }
 }

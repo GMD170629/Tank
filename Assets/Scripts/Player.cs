@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     public GameObject explosionPrefab;
     public GameObject defenedEffectPrefab;
 
+    public AudioSource moveAudio;
+    public AudioClip[] tankAudio;
+    
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -33,19 +36,12 @@ public class Player : MonoBehaviour
     {
         //保护罩
         Defened();
-
         
-    }
-
-    private void FixedUpdate()
-    {
-
+        // Attack();
         if (PlayManager.Instance.isDefeat)
         {
             return;
         }
-
-        Move();
         
         //攻击的CD
         if (_timeVal >= 0.4f)
@@ -56,6 +52,19 @@ public class Player : MonoBehaviour
         {
             _timeVal += Time.deltaTime;
         }
+        
+    }
+
+    private void FixedUpdate()
+    {
+        // Attack();
+
+        if (PlayManager.Instance.isDefeat)
+        {
+            return;
+        }
+
+        Move();
     }
 
     private void Attack()
@@ -86,13 +95,22 @@ public class Player : MonoBehaviour
             _bulletEulerAngles = new Vector3(0, 0, -90);
         }
 
+        if (Mathf.Abs(h) > 0.05f)
+        {
+            moveAudio.clip = tankAudio[1];
+            if (!moveAudio.isPlaying)
+            {
+                moveAudio.Play();
+            }
+        }
+        
         if (h != 0)
         {
             return;
         }
 
         float v = Input.GetAxisRaw("Vertical");
-        transform.Translate(Vector3.up * v * moveSpeed * Time.deltaTime, Space.World);
+        transform.Translate(Vector3.up * v * moveSpeed * Time.fixedDeltaTime, Space.World);
 
         if (v < 0)
         {
@@ -103,6 +121,24 @@ public class Player : MonoBehaviour
         {
             _spriteRenderer.sprite = tankSprite[0];
             _bulletEulerAngles = new Vector3(0, 0, 0);
+        }
+        
+
+        if (Mathf.Abs(v) > 0.05f)
+        {
+            moveAudio.clip = tankAudio[1];
+            if (!moveAudio.isPlaying)
+            {
+                moveAudio.Play();
+            }
+        }
+        else
+        {
+            moveAudio.clip = tankAudio[0];
+            if (!moveAudio.isPlaying)
+            {
+                moveAudio.Play();
+            }
         }
     }
 

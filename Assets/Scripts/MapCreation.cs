@@ -13,6 +13,11 @@ public class MapCreation : MonoBehaviour
 
     private void Awake()
     {
+        InitMap();
+    }
+
+    private void InitMap()
+    {
         //实例化老家
         CreateItem(item[0], new Vector3(-2, -7, 0), Quaternion.identity);
         //用墙把老家围起来
@@ -45,7 +50,7 @@ public class MapCreation : MonoBehaviour
         CreateItem(item[3], new Vector3(-15, 7, 0), Quaternion.identity);
         
         //每3s随机产生一个敌人
-        InvokeRepeating("createEnemy", 4, 5);
+        InvokeRepeating("CreateEnemy", 4, 5);
         
         //产生随机地图
         for (int i = 0; i < 40; i++)
@@ -95,21 +100,21 @@ public class MapCreation : MonoBehaviour
         }
     }
 
-    private void createEnemy()
+    private void CreateEnemy()
     {
         int num = Random.Range(0, 3);
         Vector3 enemyPos = new Vector3();
         if (num == 0)
         {
-            enemyPos = new Vector3(13, 7, 0);
+            enemyPos = new Vector3(11, 7, 0);
         }
         else if (num == 1)
         {
-            enemyPos = new Vector3(0, 7, 0);
+            enemyPos = new Vector3(-2, 7, 0);
         }
         else if (num == 2)
         {
-            enemyPos = new Vector3(-13, 7, 0);
+            enemyPos = new Vector3(-15, 7, 0);
         }
         
         CreateItem(item[3], enemyPos, Quaternion.identity);
