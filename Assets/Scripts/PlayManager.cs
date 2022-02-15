@@ -66,7 +66,7 @@ public class PlayManager : MonoBehaviour
         {
             lifeValue--;
             //玩家重生
-            GameObject go = Instantiate(born, new Vector3(-2, -7, 0), Quaternion.identity);
+            GameObject go = Instantiate(born, new Vector3(-4, -7, 0), Quaternion.identity);
             go.GetComponent<Born>().createPlayer = true;
             isDead = false;
         }

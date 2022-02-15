@@ -14,17 +14,17 @@ public class MapCreation : MonoBehaviour
     private void Awake()
     {
         //实例化老家
-        CreateItem(item[0], new Vector3(0, -7, 0), Quaternion.identity);
+        CreateItem(item[0], new Vector3(-2, -7, 0), Quaternion.identity);
         //用墙把老家围起来
+        CreateItem(item[1], new Vector3(-3, -7, 0), Quaternion.identity);
         CreateItem(item[1], new Vector3(-1, -7, 0), Quaternion.identity);
-        CreateItem(item[1], new Vector3(1, -7, 0), Quaternion.identity);
-        for (int i = -1; i < 2; i++)
+        for (int i = -3; i < 0; i++)
         {
             CreateItem(item[1], new Vector3(i, -6, 0), Quaternion.identity);
         }
 
         //实例化一下周围的空气墙
-        for (int i = -14; i < 15; i++)
+        for (int i = -16; i < 13; i++)
         {
             CreateItem(item[6], new Vector3(i, 8, 0), Quaternion.identity);
             CreateItem(item[6], new Vector3(i, -8, 0), Quaternion.identity);
@@ -32,21 +32,20 @@ public class MapCreation : MonoBehaviour
 
         for (int i = -7; i < 8; i++)
         {
-            CreateItem(item[6], new Vector3(14, i, 0), Quaternion.identity);
-            CreateItem(item[6], new Vector3(-14, i, 0), Quaternion.identity);
+            CreateItem(item[6], new Vector3(12, i, 0), Quaternion.identity);
+            CreateItem(item[6], new Vector3(-16, i, 0), Quaternion.identity);
         }
 
         //玩家的出生
-        GameObject go = Instantiate(item[3], new Vector3(-2, -7, 0), Quaternion.identity);
+        GameObject go = Instantiate(item[3], new Vector3(-4, -7, 0), Quaternion.identity);
         go.GetComponent<Born>().createPlayer = true;
         //敌人的出生
-        CreateItem(item[3], new Vector3(13, 7, 0), Quaternion.identity);
-        CreateItem(item[3], new Vector3(0, 7, 0), Quaternion.identity);
-        CreateItem(item[3], new Vector3(-13, 7, 0), Quaternion.identity);
+        CreateItem(item[3], new Vector3(11, 7, 0), Quaternion.identity);
+        CreateItem(item[3], new Vector3(-2, 7, 0), Quaternion.identity);
+        CreateItem(item[3], new Vector3(-15, 7, 0), Quaternion.identity);
         
         //每3s随机产生一个敌人
         InvokeRepeating("createEnemy", 4, 5);
-        
         
         //产生随机地图
         for (int i = 0; i < 40; i++)
@@ -72,6 +71,7 @@ public class MapCreation : MonoBehaviour
 
     private void CreateItem(GameObject createGameObject, Vector3 createPosition, Quaternion createRotaion)
     {
+        
         GameObject itemGo = Instantiate(createGameObject, createPosition, createRotaion);
         itemGo.transform.SetParent(gameObject.transform);
         _itemPosition.Add(createPosition);
@@ -82,11 +82,11 @@ public class MapCreation : MonoBehaviour
      */
     private Vector3 CreateRandomPostion()
     {
-        //不生成 x = 13 -13 y= 8 -8的物体
+        //不生成 周围一圈的物体
 
         while (true)
         {
-            Vector3 createPosition = new Vector3(Random.Range(-12, 13), Random.Range(-6, 7), 0);
+            Vector3 createPosition = new Vector3(Random.Range(-14, 11), Random.Range(-6, 7), 0);
 
             if (!HasThePosition(createPosition))
             {
