@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class Enemy : MonoBehaviour
     private float _timeVal;
     private float _timeValChangeDeriction;
 
-    private float _v;
+    private float _v = -1;
     private float _h;
     
     // private bool _isDefended = true;
@@ -136,13 +138,22 @@ public class Enemy : MonoBehaviour
         //     return;
         // }
 
+        PlayManager.Instance.playerScore++;
+        
         //产生爆炸特效 
         Instantiate(explosionPrefab, transform.position, transform.rotation);
 
         //死亡
         Destroy(gameObject);
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("Enemy") || col.gameObject.CompareTag("Barrier") || col.gameObject.CompareTag("Water"))
+        {
+            _timeValChangeDeriction = 4;
+        }
+    }
     // public void Defened()
     // {
     //     if (_isDefended)

@@ -26,5 +26,7 @@ public class Heart : MonoBehaviour
     {
         _spriteRenderer.sprite = brokenSprite;
         Instantiate(explosionPrefab, transform.position, transform.rotation);
+
+        PlayManager.Instance.isDefeat = true;
     }
 }

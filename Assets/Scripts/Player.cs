@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     private float _defenedTimeVal = 3;
     private float _timeVal;
     private bool _isDefended = true;
-
+    
     private SpriteRenderer _spriteRenderer;
 
     public Sprite[] tankSprite;
@@ -34,6 +34,19 @@ public class Player : MonoBehaviour
         //保护罩
         Defened();
 
+        
+    }
+
+    private void FixedUpdate()
+    {
+
+        if (PlayManager.Instance.isDefeat)
+        {
+            return;
+        }
+
+        Move();
+        
         //攻击的CD
         if (_timeVal >= 0.4f)
         {
@@ -43,11 +56,6 @@ public class Player : MonoBehaviour
         {
             _timeVal += Time.deltaTime;
         }
-    }
-
-    private void FixedUpdate()
-    {
-        Move();
     }
 
     private void Attack()
@@ -113,6 +121,9 @@ public class Player : MonoBehaviour
 
         //死亡
         Destroy(gameObject);
+        
+        //减少生命并重生
+        PlayManager.Instance.isDead = true;
     }
 
     public void Defened()
