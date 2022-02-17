@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         //保护罩
-        Defened();
+        Defend();
 
         // Attack();
         if (PlayManager.Instance.isDefeat)
@@ -231,7 +231,7 @@ public class Player : MonoBehaviour
         PlayManager.Instance.isDead = true;
     }
 
-    public void Defened()
+    public void Defend()
     {
         if (_isDefended)
         {

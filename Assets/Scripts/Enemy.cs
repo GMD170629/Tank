@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
     {
         
         //保护罩
-        // Defened();
+        // Defend();
 
         //攻击的时间间隔
         if (_timeVal >= 3)
@@ -154,7 +154,8 @@ public class Enemy : MonoBehaviour
             _timeValChangeDeriction = 4;
         }
     }
-    // public void Defened()
+    // public void
+    // Defend()
     // {
     //     if (_isDefended)
     //     {
