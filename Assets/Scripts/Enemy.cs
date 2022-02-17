@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     public Sprite[] tankSprite;
     public GameObject bulletPrefab;
     public GameObject explosionPrefab;
-    // public GameObject defenedEffectPrefab;
+    // public GameObject defendEffectPrefab;
 
     private void Awake()
     {
@@ -158,13 +158,13 @@ public class Enemy : MonoBehaviour
     // {
     //     if (_isDefended)
     //     {
-    //         defenedEffectPrefab.SetActive(true);
+    //         defendEffectPrefab.SetActive(true);
     //         _defenedTimeVal -= Time.deltaTime;
     //
     //         if (_defenedTimeVal <= 0)
     //         {
     //             _isDefended = false;
-    //             defenedEffectPrefab.SetActive(false);
+    //             defendEffectPrefab.SetActive(false);
     //         }
     //     }
     // }

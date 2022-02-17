@@ -102,14 +102,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  tankAnimatorControllers:
-  - {fileID: 9100000, guid: 0b04a72e26cf84bbd9134f1a083bf591, type: 2}
-  - {fileID: 9100000, guid: 9050b2d2f79b846e499315090d831476, type: 2}
-  - {fileID: 9100000, guid: 5f2ba272353a24758a7ac5bed1d58021, type: 2}
-  - {fileID: 9100000, guid: d4828ead99245412789a13c5f146bcb3, type: 2}
   bulletPrefab: {fileID: 7679514464347504898, guid: 42c1a894cac5d48f6aa83965632e0f7d, type: 3}
   explosionPrefab: {fileID: 1959085707373102131, guid: 2cf40a9bbd4f040a8b253bdf16dd03ff, type: 3}
-  defenedEffectPrefab: {fileID: 4764170804077464885}
+  defendEffectPrefab: {fileID: 5767976892151060041, guid: 83e705cf012a2449ea3a0a7e3fca9598, type: 3}
   moveAudio: {fileID: 3276170743179099737}
   tankAudio:
   - {fileID: 8300000, guid: c5cfdb88353725d4e80bb5a486606c9e, type: 3}
@@ -353,11 +348,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e705cf012a2449ea3a0a7e3fca9598, type: 3}
---- !u!1 &4764170804077464885 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5767976892151060041, guid: 83e705cf012a2449ea3a0a7e3fca9598, type: 3}
-  m_PrefabInstance: {fileID: 1303304418636094332}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4764170804077464886 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5767976892151060042, guid: 83e705cf012a2449ea3a0a7e3fca9598, type: 3}

@@ -1,27 +1,30 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     public float moveSpeed = 3;
     private Vector3 _bulletEulerAngles;
-    private float _defenedTimeVal = 3;
+    private float _defendTimeVal = 3;
+
     private float _timeVal;
+
+    //保护状态
     private bool _isDefended = true;
+
+    //是否在移动？
     private bool _isMove;
 
-    private int _hKeyFrame = 0;
-    private int _vKeyFrame = 0;
+    //物体旋转角度偏移量
+    private int _direction;
+
+    private int _hKeyFrame;
+    private int _vKeyFrame;
 
     private Animator _animator;
 
-    public AnimatorController[] tankAnimatorControllers;
     public GameObject bulletPrefab;
     public GameObject explosionPrefab;
-    public GameObject defenedEffectPrefab;
+    public GameObject defendEffectPrefab;
 
     public AudioSource moveAudio;
     public AudioClip[] tankAudio;
@@ -131,7 +134,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(bulletPrefab, transform.position, Quaternion.Euler(transform.eulerAngles + _bulletEulerAngles));
+            Instantiate(bulletPrefab, transform.position, Quaternion.Euler(_bulletEulerAngles));
             _timeVal = 0;
         }
     }
@@ -163,7 +166,9 @@ public class Player : MonoBehaviour
     private void MoveUp(float distance)
     {
         //控制行走动画
-        _animator.runtimeAnimatorController = tankAnimatorControllers[0];
+        transform.Rotate(0, 0,  0 - _direction);
+        _direction = 0;
+        
         //控制子弹旋转
         _bulletEulerAngles = new Vector3(0, 0, 0);
         //移动
@@ -173,7 +178,9 @@ public class Player : MonoBehaviour
     private void MoveRight(float distance)
     {
         //控制行走动画
-        _animator.runtimeAnimatorController = tankAnimatorControllers[1];
+        transform.Rotate(0, 0, -90 - _direction);
+        _direction = -90;
+        
         //控制子弹旋转
         _bulletEulerAngles = new Vector3(0, 0, -90);
         //移动
@@ -182,8 +189,10 @@ public class Player : MonoBehaviour
 
     private void MoveDown(float distance)
     {
-        //控制行走动画
-        _animator.runtimeAnimatorController = tankAnimatorControllers[2];
+        //旋转
+        transform.Rotate(0, 0, 180 - _direction);
+        _direction = 180;
+
         //控制子弹旋转
         _bulletEulerAngles = new Vector3(0, 0, -180);
         //移动
@@ -193,7 +202,9 @@ public class Player : MonoBehaviour
     private void MoveLeft(float distance)
     {
         //控制行走动画
-        _animator.runtimeAnimatorController = tankAnimatorControllers[3];
+        transform.Rotate(0, 0, 90 - _direction);
+        _direction = 90;
+        
         //控制子弹旋转
         _bulletEulerAngles = new Vector3(0, 0, 90);
         //移动
@@ -224,13 +235,13 @@ public class Player : MonoBehaviour
     {
         if (_isDefended)
         {
-            defenedEffectPrefab.SetActive(true);
-            _defenedTimeVal -= Time.deltaTime;
+            defendEffectPrefab.SetActive(true);
+            _defendTimeVal -= Time.deltaTime;
 
-            if (_defenedTimeVal <= 0)
+            if (_defendTimeVal <= 0)
             {
                 _isDefended = false;
-                defenedEffectPrefab.SetActive(false);
+                defendEffectPrefab.SetActive(false);
             }
         }
     }
@@ -239,11 +250,18 @@ public class Player : MonoBehaviour
     {
         if (_isMove)
         {
+            moveAudio.clip = tankAudio[1];
             _animator.speed = 1;
         }
         else
         {
+            moveAudio.clip = tankAudio[0];
             _animator.speed = 0;
+        }
+
+        if (!moveAudio.isPlaying)
+        {
+            moveAudio.Play();
         }
     }
 }
