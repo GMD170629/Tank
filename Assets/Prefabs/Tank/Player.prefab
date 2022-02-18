@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4306431107085343309}
   - component: {fileID: 3276170743179099737}
   - component: {fileID: 653025382232994737}
-  - component: {fileID: 2639854812095428039}
   m_Layer: 0
   m_Name: Player
   m_TagString: Tank
@@ -104,7 +103,7 @@ MonoBehaviour:
   moveSpeed: 3
   bulletPrefab: {fileID: 7679514464347504898, guid: 42c1a894cac5d48f6aa83965632e0f7d, type: 3}
   explosionPrefab: {fileID: 1959085707373102131, guid: 2cf40a9bbd4f040a8b253bdf16dd03ff, type: 3}
-  defendEffectPrefab: {fileID: 5767976892151060041, guid: 83e705cf012a2449ea3a0a7e3fca9598, type: 3}
+  defendEffectPrefab: {fileID: 8265339515859408794}
   moveAudio: {fileID: 3276170743179099737}
   tankAudio:
   - {fileID: 8300000, guid: c5cfdb88353725d4e80bb5a486606c9e, type: 3}
@@ -271,22 +270,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!111 &2639854812095428039
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9141273971040389821}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 2a8202274b2f642d6af7f7288f31ca3d, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 2a8202274b2f642d6af7f7288f31ca3d, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1001 &2503889324766904787
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -297,6 +280,10 @@ PrefabInstance:
     - target: {fileID: 5767976892151060041, guid: 83e705cf012a2449ea3a0a7e3fca9598, type: 3}
       propertyPath: m_Name
       value: Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 5767976892151060041, guid: 83e705cf012a2449ea3a0a7e3fca9598, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5767976892151060042, guid: 83e705cf012a2449ea3a0a7e3fca9598, type: 3}
       propertyPath: m_RootOrder
@@ -344,6 +331,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e705cf012a2449ea3a0a7e3fca9598, type: 3}
+--- !u!1 &8265339515859408794 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5767976892151060041, guid: 83e705cf012a2449ea3a0a7e3fca9598, type: 3}
+  m_PrefabInstance: {fileID: 2503889324766904787}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8265339515859408793 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5767976892151060042, guid: 83e705cf012a2449ea3a0a7e3fca9598, type: 3}
